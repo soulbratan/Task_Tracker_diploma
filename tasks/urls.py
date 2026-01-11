@@ -1,11 +1,8 @@
-
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import (
-    BlockingTasksWithAssignmentsView, BusyEmployeesView, CommentViewSet, DepartmentStatisticsView,
-    EmployeeSuggestionView, ImportantTasksView, TaskViewSet)
-
+from .views import (BlockingTasksWithAssignmentsView, BusyEmployeesView, CommentViewSet, DepartmentStatisticsView,
+                    EmployeeSuggestionView, ImportantTasksView, TaskViewSet)
 
 router = DefaultRouter()
 router.register(r"tasks", TaskViewSet, basename="task")
@@ -22,7 +19,6 @@ urlpatterns = [
         CommentViewSet.as_view({"get": "retrieve", "delete": "destroy"}),
         name="task-comment-detail",
     ),
-
     path("employees/busy/", BusyEmployeesView.as_view(), name="busy-employees"),
     path("important-tasks/blocking/", ImportantTasksView.as_view(), name="blocking-tasks"),
     path("important-tasks/<int:task_id>/suggestions/", EmployeeSuggestionView.as_view(), name="task-suggestions"),

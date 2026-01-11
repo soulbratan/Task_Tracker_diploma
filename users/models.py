@@ -6,8 +6,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class UserManager(BaseUserManager):
     """
-        Кастомный менеджер пользователей для модели User.
+    Кастомный менеджер пользователей для модели User.
     """
+
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("Email обязателен")
