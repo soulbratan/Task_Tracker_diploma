@@ -33,8 +33,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # API
     path("api/users/", include("users.urls")),
-    # path("api/organization/", include("organization.urls")),
-    # path("api/tasks/", include("tasks.urls")),
+    path("api/organization/", include("organization.urls")),
+    path("api/tasks/", include("tasks.urls")),
     # Документация
     path("swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="redoc"),

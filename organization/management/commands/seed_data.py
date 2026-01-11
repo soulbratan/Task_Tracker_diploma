@@ -290,7 +290,7 @@ class Command(BaseCommand):
                 "title": "Разработка фронтенда",
                 "description": "Верстка и клиентская часть сайта",
                 "parent": "Запуск нового веб-сайта",
-                "assignee": "Senior разработчик",
+                "assignee": None,
                 "owner": "Руководитель IT",
                 "deadline": now + timedelta(days=90),
                 "status": "in_progress",
@@ -312,7 +312,7 @@ class Command(BaseCommand):
                 "title": "Верстка главной страницы",
                 "description": "Адаптивная верстка главной страницы",
                 "parent": "Разработка фронтенда",
-                "assignee": "Senior разработчик",
+                "assignee": None,
                 "owner": "Руководитель IT",
                 "deadline": now + timedelta(days=30),
                 "status": "assigned",
@@ -335,7 +335,7 @@ class Command(BaseCommand):
                 "title": "Кампания по продвижению продукта X",
                 "description": "Маркетинговая кампания для нового продукта",
                 "parent": None,
-                "assignee": "Ведущий маркетолог",
+                "assignee": None,
                 "owner": "Ведущий маркетолог",
                 "deadline": now + timedelta(days=120),
                 "status": "in_progress",
@@ -346,7 +346,7 @@ class Command(BaseCommand):
                 "title": "Разработка рекламных материалов",
                 "description": "Баннеры, презентации, буклеты",
                 "parent": "Кампания по продвижению продукта X",
-                "assignee": "Ведущий маркетолог",
+                "assignee": None,
                 "owner": "Ведущий маркетолог",
                 "deadline": now + timedelta(days=60),
                 "status": "in_progress",
@@ -380,7 +380,7 @@ class Command(BaseCommand):
                 "title": "Сбор данных по клиентам",
                 "description": "Анализ клиентской базы и покупок",
                 "parent": "Квартальный отчет по продажам",
-                "assignee": "Менеджер по продажам",
+                "assignee": None,
                 "owner": "Менеджер по продажам",
                 "deadline": now - timedelta(days=5),  # ← ПРОСРОЧЕННАЯ
                 "status": "completed",
@@ -433,41 +433,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f"Задача: {task.title} ({status_display})"))
 
         return task
-
-    def create_comments(self, users, tasks):
-        """Создание комментариев"""
-        self.stdout.write("Создаем комментарии...")
-
-        comments_data = [
-            {
-                "task": "Разработка бэкенда",
-                "author": "ivanov@company.com",
-                "content": "Эта задача критична для всего проекта. Нужно найти разработчика ASAP!",
-            },
-            {
-                "task": "Разработка API для продуктов",
-                "author": "ivanov@company.com",
-                "content": "API должно поддерживать фильтрацию по категориям и ценам",
-            },
-            {
-                "task": "Верстка главной страницы",
-                "author": "petrov@company.com",
-                "content": "Главная страница готова на 80%. Осталось добавить анимации.",
-            },
-            {
-                "task": "Анализ конкурентов",
-                "author": "sidorova@company.com",
-                "content": "Нужно проанализировать 5 основных конкурентов на рынке.",
-            },
-        ]
-
-        for data in comments_data:
-            task = tasks.get(data["task"])
-            author = users.get(data["author"])
-
-            if task and author:
-                Comment.objects.create(task=task, author=author, content=data["content"])
-                self.stdout.write(self.style.SUCCESS(f'💬 Комментарий к "{task.title}" от {author.get_full_name()}'))
 
     def print_summary(self, users, departments, positions, tasks):
         """Вывод сводки"""
