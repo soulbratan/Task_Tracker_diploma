@@ -13,12 +13,6 @@ services:
       - "8000"
     ports:
       - "8000:8000"
-    environment:
-      - POSTGRES_HOST=db
-      - DJANGO_ALLOWED_HOSTS=127.0.0.1 localhost [::1]
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - CELERY_TASK_ALWAYS_EAGER=False
     depends_on:
       - db
       - redis
@@ -61,10 +55,6 @@ services:
     command: celery -A config worker --loglevel=info
     volumes:
       - .:/app
-    environment:
-      - DEBUG=False
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
     env_file:
       - .env
     depends_on:
